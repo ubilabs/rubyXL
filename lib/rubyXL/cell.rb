@@ -30,7 +30,7 @@ module RubyXL
         if @workbook.num_fmts
           num_fmt_id = xf_id()[:numFmtId]
           tmp_num_fmt = @workbook.num_fmts[:numFmt].select { |f| f[:attributes][:numFmtId] == num_fmt_id }[0]
-          num_fmt = (tmp && tmp[:attributes] && tmp[:attributes][:formatCode]) ? tmp[:attributes][:formatCode] : nil
+          num_fmt = (tmp_num_fmt && tmp_num_fmt[:attributes] && tmp_num_fmt[:attributes][:formatCode]) ? tmp_num_fmt[:attributes][:formatCode] : nil
           if num_fmt && workbook.date_num_fmt?(num_fmt)
             return true
           end
@@ -395,7 +395,7 @@ module RubyXL
     end
 
     def inspect
-      str = "(#{@row},#{@column}): #{@value}" 
+      str = "(#{@row},#{@column}): #{@value}"
       str += " =#{@formula}" if @formula
       str += ", datatype = #{@datatype}, style_index = #{@style_index}"
       return str
